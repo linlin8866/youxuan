@@ -1,6 +1,4 @@
-cd /root && git clone https://github.com/linlin8866/youxuan || cd youxuan && git pull
-
-cat > /root/youxuan/warp-auto-ip.sh << 'EOF'
+cat > /root/warp-auto-ip.sh << 'EOF'
 #!/bin/bash
 set -euo pipefail
 
@@ -155,7 +153,4 @@ case "${1:-}" in
 esac
 EOF
 
-cd /root/youxuan
-git add warp-auto-ip.sh
-git commit -m "上传WARP自动优选IP脚本（无IPv6优先，含NF检测+开机自启）"
-git push origin main
+chmod +x /root/warp-auto-ip.sh && /root/warp-auto-ip.sh
