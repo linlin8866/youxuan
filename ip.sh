@@ -1,4 +1,3 @@
-cat > /root/warp-auto-ip.sh << 'EOF'
 #!/bin/bash
 set -euo pipefail
 
@@ -52,7 +51,7 @@ get_ip_info() {
     echo "$ip|$ip_version|$country"
 }
 
-# ========== 优选优质IP（不限制国家、不限制IPv6） ==========
+# ========== 优选优质IP ==========
 select_best_ip() {
     log "开始优选 可解锁Netflix 的优质IP..."
     local max_attempts=30
@@ -130,7 +129,7 @@ Wants=network-online.target wireproxy.service sing-box.service
 
 [Service]
 Type=simple
-ExecStart=/root/warp-auto-ip.sh daemon
+ExecStart=/root/ip.sh daemon
 Restart=always
 RestartSec=5
 User=root
@@ -165,9 +164,6 @@ case "${1:-}" in
         log "=== 部署完成 ==="
         log "查看状态：systemctl status warp-auto-ip"
         log "查看日志：tail -f $LOG_FILE"
-        log "手动换IP：/root/warp-auto-ip.sh select"
+        log "手动换IP：/root/ip.sh select"
         ;;
 esac
-EOF
-
-chmod +x /root/warp-auto-ip.sh && /root/warp-auto-ip.sh
